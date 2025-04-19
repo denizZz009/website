@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal Siyah Tema */
+
+@layer base {
+  :root {
+    /* Temel Renkler */
+    --pure-black: 0 0% 0%;
+    --deep-black: 0 0% 5%;
+    --dark-gray: 0 0% 10%;
+    --mid-gray: 0 0% 20%;
+    --light-gray: 0 0% 35%;
+    --lighter-gray: 0 0% 50%;
+    --off-white: 0 0% 96%;
+    --pure-white: 0 0% 100%;
+
+    /* Tema Değişkenleri */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* UI Renkleri */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 5%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 40%;
+
+    /* Grafik Renkleri */
+    --chart-1: 0 0% 90%;
+    --chart-2: 0 0% 80%;
+    --chart-3: 0 0% 70%;
+    --chart-4: 0 0% 60%;
+    --chart-5: 0 0% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .light {
+    /* Temel Renkler - Light Tema (kullanılmayacak) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 7%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 7%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 0 0% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Minimalist Animasyonlar ve Efektler */
+@layer components {
+  /* Glow Efekti */
+  .glow-effect {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .glow-effect:hover {
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .glow-effect::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.5s, opacity 0.5s;
+  }
+
+  .glow-effect:hover::after {
+    opacity: 1;
+    transform: scale(2);
+  }
+
+  /* Beyaz Çizgi Vurgu */
+  .line-hover {
+    position: relative;
+  }
+
+  .line-hover::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: width 0.3s ease;
+  }
+
+  .line-hover:hover::after {
+    width: 100%;
+  }
+
+  /* Buton Efektleri */
+  .minimal-button {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .minimal-button:hover {
+    background-color: hsl(var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+
+  .minimal-button:active {
+    transform: translateY(0);
+  }
+
+  /* Yükselen Kart Efekti */
+  .rise-card {
+    background-color: hsl(var(--card));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Sayfalar Arası Geçiş Animasyonu */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  /* Beyaz Glow Animasyonu */
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  /* Sayfa Yüklenme Animasyonu */
+  @keyframes gradientLoad {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .gradient-load {
+    background: linear-gradient(90deg,
+      hsl(var(--dark-gray)),
+      hsl(var(--mid-gray)),
+      hsl(var(--dark-gray))
+    );
+    background-size: 200% 100%;
+    animation: gradientLoad 2s ease infinite;
+  }
+}
+
+/* Ekstra Utility Sınıfları */
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Diğer Global Stiller */
+::selection {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--accent));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
